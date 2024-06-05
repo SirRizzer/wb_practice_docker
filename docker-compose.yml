@@ -1,19 +1,29 @@
-version: ‘3.9.2’
+version: ‘3.8’
 
 services:
   zookeeper:
     image: zookeeper
     container_name: test-zookeeper
     restart: unless-stopped
-    cpus: «1.5»
+    cpus: "1.5"
     mem_limit: 256m
     environment:
 	    ZOO_INIT_LIMIT: 10
 	    ZOO_MAX_CLIENT_CNXNS: 1
     ports:
       - 2181:2181
-      - 2888 :2888
-      - 3888 :3888
-      - 8080 :8080
+      - 2888:2888
+      - 3888:3888
+      - 8080:8080
     volumes:
-      - /var/docker/zoo/:/data/
+      - /var/docker/zoo/:/data
+   clickhouse-server:
+    image: clickhouse/clickhouse-server
+    container_name: clickhouse-server
+    restart: unless-stopped
+    cpus: "1.0"
+    mem_limit: 1g
+    ports:
+      - 8123:8123
+    volumes:
+      - /var/docker/clickhouse/:/var/lib/clickhouse
