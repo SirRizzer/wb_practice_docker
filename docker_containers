@@ -1,11 +1,18 @@
 docker pull zookeeper
+docker pull clickhouse/clickhouse-server
   
-docker run --name test-zookeeper --restart unless-stopped --cpus="1.5" -m 256m -e "ZOO_INIT_LIMIT=10" -e "ZOO_MAX_CLIENT_CNXNS=1" -p 2181:2181 -p 2888:2888 -p 3888:3888 -p 8080:8080 -v /var/docker/zoo/:/data/ zookeeper
+docker run --name test-zookeeper --restart unless-stopped --cpus="1.5" -m 256m -e "ZOO_INIT_LIMIT=10" -e "ZOO_MAX_CLIENT_CNXNS=1" -p 2181:2181 -p 2888:2888 -p 3888:3888 -p 8080:8080 -v /var/docker/zoo/:/data zookeeper
+
+docker run -d --name clickhouse-server --restart unless-stopped --cpus="1.0" --memory="1g" -p 8123:8123 -v /var/docker/clickhouse/:/var/lib/clickhouse clickhouse/clickhouse-server
 
 docker restart zookeeper
+docker restart clickhouse-server
 
 docker stop zookeeper
+docker stop clickhouse-server
 
 docker rm zookeeper
+docker rm clickhouse-server
 
 docker rmi zookeeper
+docker rmi clickhouse-server
