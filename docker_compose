@@ -2,7 +2,7 @@ mkdir compose
 cd compose
 nano docker-compose.yml
 
-ersion: ‘3.8’
+version: ‘3.8’
 
 services:
   zookeeper:
