@@ -7,14 +7,14 @@ services:
     restart: unless-stopped
     cpus: "1.5"
     mem_limit: 256m
-    environment:
-	    ZOO_INIT_LIMIT: 10
-	    ZOO_MAX_CLIENT_CNXNS: 1
     ports:
       - 2181:2181
       - 2888:2888
       - 3888:3888
       - 8080:8080
+    environment:
+     ZOO_INIT_LIMIT: 10
+     ZOO_MAX_CLIENT_CNXNS: 1
     volumes:
       - /var/docker/zoo/:/data
   clickhouse-server:
